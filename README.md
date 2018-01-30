@@ -4,7 +4,7 @@
 # minigrep
 Command line tool for searching a file for specific text.
 This tool is based on Chapter 12 of the
-[Rust book](https://doc.rust-lang.org/book/second-edition/ch12-00-an-io-project.html).
+[Rust book (second edition)](https://doc.rust-lang.org/book/second-edition/ch12-00-an-io-project.html).
 
 # Prerequisites
 This tool requires Rust version 1.23.0 or higher to be installed.
