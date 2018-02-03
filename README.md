@@ -10,6 +10,7 @@ This tool is based on chapter 12 of the
 ## Table of Contents
 - [Motivation](#motivation)
 - [Prerequisites](#prerequisites)
+- [Documentation](#documentation)
 - [Build](#build)
 - [Test](#test)
 - [Run](#run)
@@ -23,13 +24,17 @@ I created this project while reading the [Rust book (second edition)](https://do
 ## Prerequisites
 This tool requires Rust version 1.23.0 or higher to be installed.
 
-## Bulid
+## Documentation
+To build and view the `minigrep` documentation in your browser, execute the following command:
+```cargo doc --open```
+
+## Build
 To build `minigrep`, execute the following command:
 ```cargo build```
 
 ## Test
 To run the `minigrep` tests, execute the following command:
-```cargo test```
+```cargo test --verbose```
 
 ## Run
 This tool can perform both case-sensitive (default) and case-insensitive searches of a file for text.
