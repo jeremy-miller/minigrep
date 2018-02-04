@@ -9,5 +9,10 @@ matrix:
 cache: cargo
 install:
     - cargo build --verbose --all
+before_script:
+    - pip install 'travis-cargo<0.2' --user && export PATH=$HOME/.local/bin:$PATH
 script:
     - cargo test --verbose --all
+after_success:
+    - travis-cargo coverage
+    - bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
