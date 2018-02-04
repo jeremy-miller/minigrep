@@ -7,6 +7,14 @@ matrix:
   allow_failures:
     - rust: nightly
 cache: cargo
+# necessary for `travis-cargo coveralls --no-sudo`
+addons:
+  apt:
+    packages:
+      - libcurl4-openssl-dev
+      - libelf-dev
+      - libdw-dev
+      - binutils-dev # optional: only required for the --verify flag of coveralls
 install:
     - cargo build --verbose --all
 before_script:
@@ -14,5 +22,4 @@ before_script:
 script:
     - cargo test --verbose --all
 after_success:
-    - travis-cargo coverage
-    - bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
+    - travis-cargo coveralls --no-sudo --verify
