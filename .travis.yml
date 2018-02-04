@@ -1,5 +1,5 @@
 language: rust
-sudo: false
+sudo: required  # so we don't get "Can't set personality" errors from kcov
 rust:
   - stable
   - beta
