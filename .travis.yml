@@ -8,10 +8,12 @@ matrix:
   allow_failures:
     - rust: nightly
 cache: cargo
-# addons required for building "kcov"
+env:
+  global:  # improves code coverage accuracy
+  - RUSTFLAGS="-C link-dead-code"
 addons:
   apt:
-    packages:
+    packages:  # required for building "kcov"
       - libcurl4-openssl-dev
       - libelf-dev
       - libdw-dev
