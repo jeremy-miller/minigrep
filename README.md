@@ -13,6 +13,8 @@ This tool is based on chapter 12 of the
 - [Prerequisites](#prerequisites)
 - [Documentation](#documentation)
 - [Build](#build)
+- [Code Formatting](#code-formatting)
+- [Static Code Analysis](#static-code-analysis)
 - [Test](#test)
 - [Run](#run)
     - [Case-Sensitive Search Example](#case-sensitive-search-example)
@@ -31,11 +33,23 @@ To build and view the `minigrep` documentation in your browser, execute the foll
 
 ## Build
 To build `minigrep`, execute the following command:
-```cargo build```
+```cargo build --all```
+
+## Code Formatting
+To run `rustfmt` on `minigrep`, execute the following steps:
+
+1. Install `rustfmt` (requires rust `nightly`): ```rustup component add rustfmt-preview --toolchain=nightly```
+2. Run `rustfmt` on the `minigrep` codebase: ```cargo +nightly fmt```
+
+## Static Code Analysis
+To run `clippy` on `minigrep`, execute the following steps:
+
+1. Install `clippy` (requires rust `nightly`): ```cargo +nightly install clippy```
+2. Run `clippy` on the `minigrep` codebase: ```cargo +nightly clippy```
 
 ## Test
 To run the `minigrep` tests, execute the following command:
-```cargo test --verbose```
+```cargo test --all```
 
 ## Run
 This tool can perform both case-sensitive (default) and case-insensitive searches of a file for text.
