@@ -49,18 +49,19 @@ impl Config {
     }
 }
 
-/// Executes a case-sensitive or case-insensitive text search of a filename based on the
+/// Executes a case-sensitive or case-insensitive text search of a file based on the
 /// configuration parameters.  Prints matching lines to `stdout`.
 ///
 /// # Arguments
-/// * `config` - A [`Config`](struct.Config.html) containing the arguments to use for this search
+/// * `config` - [`Config`](struct.Config.html) containing the arguments to use for this search
 /// execution.
 ///
 /// # Return
 /// `Result` of either `()` if successful, or an `Error` trait object.
 ///
 /// # Errors
-/// *
+/// * Returns errors related to opening `filename` (e.g. file doesn't exist, permissions issues, etc).
+/// * Returns an error if `filename` does not contain valid UTF-8 data.
 pub fn run(config: Config) -> Result<(), Box<Error>> {
     let mut f = File::open(config.filename)?;
 
