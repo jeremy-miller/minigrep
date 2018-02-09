@@ -14,7 +14,7 @@ pub struct Config {
 }
 
 impl Config {
-    /// Creates a new `Config`.
+    /// Creates a new [`Config`](struct.Config.html).
     ///
     /// # Arguments
     /// * `args` - Command line arguments for this `minigrep` execution.
@@ -24,8 +24,10 @@ impl Config {
     /// literal error message.
     ///
     /// # Errors
-    /// * Returns a string literal `Err` if no `query` argument is passed.
-    /// * Returns a string literal `Err` if no `filename` argument is passed.
+    /// * Returns a string literal `Err` if no [`query`](struct.Config.html#structfield.query)
+    ///   argument is passed.
+    /// * Returns a string literal `Err` if no [`filename`](struct.Config.html#structfield.filename)
+    ///   argument is passed.
     pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {  // 'static is the lifetime of string literals (error message)
         args.next(); // skip the first argument (the program name)
 
@@ -60,8 +62,10 @@ impl Config {
 /// `Result` of either `()` if successful, or an `Error` trait object.
 ///
 /// # Errors
-/// * Returns errors related to opening `filename` (e.g. file doesn't exist, permissions issues, etc).
-/// * Returns an error if `filename` does not contain valid UTF-8 data.
+/// * Returns errors related to opening [`filename`](struct.Config.html#structfield.filename)
+///   (e.g. file doesn't exist, permissions issues, etc).
+/// * Returns an error if [`filename`](struct.Config.html#structfield.filename) does not contain
+///   valid UTF-8 data.
 pub fn run(config: Config) -> Result<(), Box<Error>> {
     let mut f = File::open(config.filename)?;
 
@@ -81,6 +85,7 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
     Ok(())
 }
 
+/// TODO
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents
         .lines()
@@ -88,6 +93,7 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
         .collect()
 }
 
+/// TODO
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents
         .lines()
