@@ -3,15 +3,31 @@ use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 
+/// Stores configuration parameters for the `minigrep` execution.
 pub struct Config {
+    /// Query string to be searched for.
     pub query: String,
+    /// File to be searched.
     pub filename: String,
+    /// Whether or not to execute a case-sensitive search.
     pub case_sensitive: bool,
 }
 
 impl Config {
-    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
-        args.next(); // skip the program name
+    /// Creates a new `Config`.
+    ///
+    /// # Arguments
+    /// * `args` - Command line arguments for this `minigrep` execution.
+    ///
+    /// # Return
+    /// `Result` of either a valid [`Config`](struct.Config.html), or an `Err` with a string
+    /// literal error message.
+    ///
+    /// # Errors
+    /// * Returns a string literal `Err` if no `query` argument is passed.
+    /// * Returns a string literal `Err` if no `filename` argument is passed.
+    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {  // 'static is the lifetime of string literals (error message)
+        args.next(); // skip the first argument (the program name)
 
         let query = match args.next() {
             Some(arg) => arg,
@@ -23,7 +39,7 @@ impl Config {
             None => return Err("Didn't get a filename"),
         };
 
-        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
+        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();  // using .is_err() to set `case_sensitive` to `true` if `CASE_INSENSITIVE` is unset
 
         Ok(Config {
             query,
@@ -33,8 +49,20 @@ impl Config {
     }
 }
 
+/// Executes a case-sensitive or case-insensitive text search of a filename based on the
+/// configuration parameters.  Prints matching lines to `stdout`.
+///
+/// # Arguments
+/// * `config` - A [`Config`](struct.Config.html) containing the arguments to use for this search
+/// execution.
+///
+/// # Return
+/// `Result` of either `()` if successful, or an `Error` trait object.
+///
+/// # Errors
+/// *
 pub fn run(config: Config) -> Result<(), Box<Error>> {
-    let mut f = File::open(config.filename).expect("file not found");
+    let mut f = File::open(config.filename)?;
 
     let mut contents = String::new();
     f.read_to_string(&mut contents)?;
