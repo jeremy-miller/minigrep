@@ -29,7 +29,7 @@ impl Config {
     ///   argument is passed.
     /// * Returns a string literal `Err` if no [`filename`](struct.Config.html#structfield.filename)
     ///   argument is passed.
-    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {  // 'static is the lifetime of string literals (error message)
+    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
         args.next(); // skip the first argument (the program name)
 
         let query = match args.next() {
@@ -42,7 +42,7 @@ impl Config {
             None => return Err("Didn't get a filename"),
         };
 
-        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();  // using .is_err() to set `case_sensitive` to `true` if `CASE_INSENSITIVE` is unset
+        let case_sensitive = env::var("CASE_INSENSITIVE").is_err(); // using .is_err() to set `case_sensitive` to `true` if `CASE_INSENSITIVE` is unset
 
         Ok(Config {
             query,
