@@ -9,7 +9,8 @@ pub struct Config {
     pub query: String,
     /// File to be searched.
     pub filename: String,
-    /// Whether or not to execute a case-sensitive search.
+    /// Whether or not to execute a case-sensitive search.  This is set via the `CASE_INSENSITIVE`
+    /// environment variable.
     pub case_sensitive: bool,
 }
 
@@ -85,7 +86,16 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
     Ok(())
 }
 
-/// TODO
+/// Executes a case-sensitive text search of a string.
+///
+/// # Arguments
+/// * `query` - [`query`](struct.Config.html#structfield.query) to search for.
+/// * `contents` - The full text string to search for [`query`](fn.search.html#arguentsfield.query)
+///                instances.
+///
+/// # Return
+/// `Vec` of lines from [`contents`](fn.search.html#arguentsfield.contents) which match the
+/// [`query`](fn.search.html#arguentsfield.query).
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents
         .lines()
@@ -93,7 +103,17 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
         .collect()
 }
 
-/// TODO
+/// Executes a case-insensitive text search of a string.  This function is called when the
+/// `CASE_INSENSITIVE` environment variable is set when calling [`run`](fn.run.html).
+///
+/// # Arguments
+/// * `query` - [`query`](struct.Config.html#structfield.query) to search for.
+/// * `contents` - The full text string to search for
+///                [`query`](fn.search_case_insensitive.html#arguentsfield.query) instances.
+///
+/// # Return
+/// `Vec` of lines from [`contents`](fn.search_case_insensitive.html#arguentsfield.contents) which
+/// match the [`query`](fn.search_case_insensitive.html#arguentsfield.query).
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents
         .lines()
