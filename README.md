@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/jeremy-miller/minigrep.svg?branch=master)](https://travis-ci.org/jeremy-miller/minigrep)
 [![codecov](https://codecov.io/gh/jeremy-miller/minigrep/branch/master/graph/badge.svg)](https://codecov.io/gh/jeremy-miller/minigrep)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jeremy-miller/minigrep/blob/master/LICENSE)
-[![Rust Version](https://img.shields.io/badge/Rust-stable-blue.svg)]()
+[![Rust Version](https://img.shields.io/badge/Rust-1.23.0-blue.svg)]()
 
 # Minigrep
 Command line tool for searching a file for specific text.
@@ -25,7 +25,7 @@ This tool is based on chapter 12 of the
 I created this project while reading the [Rust book (second edition)](https://doc.rust-lang.org/book/second-edition/).
 
 ## Prerequisites
-This tool requires Rust version 1.23.0 or higher to be installed.
+This tool requires at least Rust version 1.23.0 to be installed.
 
 ## Documentation
 To build and view the `minigrep` documentation in your browser, execute the following command:
