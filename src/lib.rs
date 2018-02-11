@@ -1,3 +1,7 @@
+//! # Minigrep
+//! `minigrep` is a tool for searching a particular file for specific text.  It can perform
+//! both case-sensitive and case-insensitive searches.
+
 use std::env;
 use std::error::Error;
 use std::fs::File;
