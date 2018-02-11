@@ -21,6 +21,8 @@ addons:
 install:
     - cargo build --all
 script:
+    - cargo +nightly fmt --all -- --write-mode=diff
+    - cargo +nightly clippy --all
     - cargo test --all
 after_success: |
   wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&

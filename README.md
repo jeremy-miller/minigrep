@@ -39,13 +39,13 @@ To build `minigrep`, execute the following command:
 To run `rustfmt` on `minigrep`, execute the following steps:
 
 1. Install `rustfmt` (requires rust `nightly`): ```rustup component add rustfmt-preview --toolchain=nightly```
-2. Run `rustfmt` on the `minigrep` codebase: ```cargo +nightly fmt```
+2. Run `rustfmt` on the `minigrep` codebase: ```cargo +nightly fmt --all```
 
 ## Static Code Analysis
 To run `clippy` on `minigrep`, execute the following steps:
 
 1. Install `clippy` (requires rust `nightly`): ```cargo +nightly install clippy```
-2. Run `clippy` on the `minigrep` codebase: ```cargo +nightly clippy```
+2. Run `clippy` on the `minigrep` codebase: ```cargo +nightly clippy --all```
 
 ## Test
 To run the `minigrep` tests, execute the following command:
