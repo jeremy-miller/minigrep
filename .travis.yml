@@ -13,8 +13,6 @@ matrix:
           script:
               - cargo +nightly fmt --all -- --write-mode=diff
               - cargo +nightly clippy --all
-    allow_failures:
-        - rust: nightly
 cache: cargo
 addons:
     apt:
