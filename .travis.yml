@@ -1,40 +1,46 @@
 language: rust
 sudo: required  # so we don't get "Can't set personality" errors from kcov
 rust:
-  - stable
-  - beta
-  - nightly
+    - stable
+    - beta
+    - nightly
 matrix:
-  allow_failures:
-    - rust: nightly
+    include:
+        - rust: nightly
+          install:
+              - rustup component add rustfmt-preview --toolchain=nightly
+              - cargo +nightly install clippy
+          script:
+              - cargo +nightly fmt --all -- --write-mode=diff
+              - cargo +nightly clippy --all
+    allow_failures:
+        - rust: nightly
 cache: cargo
 addons:
-  apt:
-    packages:  # required for building "kcov"
-      - libcurl4-openssl-dev
-      - libelf-dev
-      - libdw-dev
-      - cmake
-      - gcc
-      - binutils-dev
-      - libiberty-dev
+    apt:
+        packages:  # required for building "kcov"
+            - libcurl4-openssl-dev
+            - libelf-dev
+            - libdw-dev
+            - cmake
+            - gcc
+            - binutils-dev
+            - libiberty-dev
 install:
     - cargo build --all
 script:
-    - cargo +nightly fmt --all -- --write-mode=diff
-    - cargo +nightly clippy --all
     - cargo test --all
 after_success: |
-  wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
-  tar xzf master.tar.gz &&
-  cd kcov-master &&
-  mkdir build &&
-  cd build &&
-  cmake .. &&
-  make &&
-  make install DESTDIR=../../kcov-build &&
-  cd ../.. &&
-  rm -rf kcov-master &&
-  for file in target/debug/minigrep-*[^\.d]; do mkdir -p "target/cov/$(basename $file)"; ./kcov-build/usr/local/bin/kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file"; done &&
-  bash <(curl -s https://codecov.io/bash) &&
-  echo "Uploaded code coverage"
+    wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
+    tar xzf master.tar.gz &&
+    cd kcov-master &&
+    mkdir build &&
+    cd build &&
+    cmake .. &&
+    make &&
+    make install DESTDIR=../../kcov-build &&
+    cd ../.. &&
+    rm -rf kcov-master &&
+    for file in target/debug/minigrep-*[^\.d]; do mkdir -p "target/cov/$(basename $file)"; ./kcov-build/usr/local/bin/kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file"; done &&
+    bash <(curl -s https://codecov.io/bash) &&
+    echo "Uploaded code coverage"
