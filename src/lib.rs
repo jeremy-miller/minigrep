@@ -42,7 +42,8 @@ impl Config {
             None => return Err("Didn't get a filename"),
         };
 
-        let case_sensitive = env::var("CASE_INSENSITIVE").is_err(); // using .is_err() to set `case_sensitive` to `true` if `CASE_INSENSITIVE` is unset
+        // using .is_err() to set `case_sensitive` to `true` if `CASE_INSENSITIVE` is unset
+        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
 
         Ok(Config {
             query,
