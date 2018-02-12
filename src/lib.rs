@@ -2,6 +2,9 @@
 //!
 //! `minigrep` is a tool for searching a particular file for specific text.  It can perform
 //! both case-sensitive and case-insensitive searches.
+//!
+//! This tool is based on chapter 12 of the
+//! [Rust book (second edition)](https://doc.rust-lang.org/book/second-edition/ch12-00-an-io-project.html).
 
 use std::env;
 use std::error::Error;
