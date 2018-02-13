@@ -27,7 +27,7 @@ impl Config {
     ///
     /// # Arguments
     ///
-    /// * `args` - Command line arguments for this `minigrep` execution.
+    /// - `args` - Command line arguments for this `minigrep` execution.
     ///
     /// # Return
     ///
@@ -36,9 +36,9 @@ impl Config {
     ///
     /// # Errors
     ///
-    /// * Returns a string literal `Err` if no [`query`](struct.Config.html#structfield.query)
+    /// - Returns a string literal `Err` if no [`query`](struct.Config.html#structfield.query)
     ///   argument is passed.
-    /// * Returns a string literal `Err` if no [`filename`](struct.Config.html#structfield.filename)
+    /// - Returns a string literal `Err` if no [`filename`](struct.Config.html#structfield.filename)
     ///   argument is passed.
     pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
         args.next(); // skip the first argument (the program name)
@@ -69,7 +69,7 @@ impl Config {
 ///
 /// # Arguments
 ///
-/// * `config` - [`Config`](struct.Config.html) containing the arguments to use for this search
+/// - `config` - [`Config`](struct.Config.html) containing the arguments to use for this search
 /// execution.
 ///
 /// # Return
@@ -78,9 +78,9 @@ impl Config {
 ///
 /// # Errors
 ///
-/// * Returns errors related to opening [`filename`](struct.Config.html#structfield.filename)
+/// - Returns errors related to opening [`filename`](struct.Config.html#structfield.filename)
 ///   (e.g. file doesn't exist, permissions issues, etc).
-/// * Returns an error if [`filename`](struct.Config.html#structfield.filename) does not contain
+/// - Returns an error if [`filename`](struct.Config.html#structfield.filename) does not contain
 ///   valid UTF-8 data.
 pub fn run(config: Config) -> Result<(), Box<Error>> {
     let mut f = File::open(config.filename)?;
@@ -105,8 +105,8 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
 ///
 /// # Arguments
 ///
-/// * `query` - [`query`](struct.Config.html#structfield.query) to search for.
-/// * `contents` - The full text string to search for [`query`](fn.search.html#arguentsfield.query)
+/// - `query` - [`query`](struct.Config.html#structfield.query) to search for.
+/// - `contents` - The full text string to search for [`query`](fn.search.html#arguentsfield.query)
 ///                instances.
 ///
 /// # Return
@@ -138,8 +138,8 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
 ///
 /// # Arguments
 ///
-/// * `query` - [`query`](struct.Config.html#structfield.query) to search for.
-/// * `contents` - The full text string to search for
+/// - `query` - [`query`](struct.Config.html#structfield.query) to search for.
+/// - `contents` - The full text string to search for
 ///                [`query`](fn.search_case_insensitive.html#arguentsfield.query) instances.
 ///
 /// # Return
